@@ -20,7 +20,36 @@ public class CampusHub {
 
             switch (choice){
                 case 1:
-                    System.out.println("Student Login Selected");
+                    int studentChoice = 0;
+                    while (studentChoice!=3){
+                        System.out.println("========================");
+                        System.out.println("        STUDENT MENU     ");
+                        System.out.println("1. view Profile");
+                        System.out.println("2. view Courses");
+                        System.out.println("3. Logout");
+                        System.out.println("========================");
+                        System.out.print("Enter your choice: ");
+
+                        studentChoice=sc.nextInt();
+                        switch (studentChoice){
+                            case 1:
+                                System.out.println("Name: Demo Student");
+                                System.out.println("ID: CH001");
+                                System.out.println("Department: CSE");
+                                break;
+                            case 2:
+                                System.out.println("Java");
+                                System.out.println("HTML");
+                                System.out.println("SQL");
+                                System.out.println("CSS");
+                                break;
+                            case 3:
+                                System.out.println("Logging out...");
+                                break;
+                            default:
+                                System.out.println("Invalid Student Menu Choice!");
+                        }
+                    }
                     break;
                 case 2:
                     System.out.println("Admin Login Selected");
