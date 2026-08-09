@@ -3,6 +3,77 @@ package main;
 import java.util.Scanner;
 
 public class CampusHub {
+
+    public static void studentMenu(Scanner sc){
+
+        String stuName = "Swagatika";
+        String stuID = "CH001";
+        String stuDepartment = "CSE";
+        String[] courses = {"Java", "HTML", "SQL", "CSS"};
+
+        int studentChoice = 0;
+        while (studentChoice!=3){
+            System.out.println("========================");
+            System.out.println("        STUDENT MENU     ");
+            System.out.println("1. View Profile");
+            System.out.println("2. View Courses");
+            System.out.println("3. Logout");
+            System.out.println("========================");
+            System.out.print("Enter your choice: ");
+
+            studentChoice=sc.nextInt();
+
+            switch (studentChoice){
+                case 1:
+                    System.out.println("Name: " +stuName);
+                    System.out.println("ID: " +stuID);
+                    System.out.println("Department: " +stuDepartment);
+                    break;
+                case 2:
+                    for(int i=0; i<courses.length; i++){
+                        System.out.println(courses[i]);
+                    }
+                    break;
+                case 3:
+                    System.out.println("Logging out...");
+                    break;
+                default:
+                    System.out.println("Invalid Student Menu Choice!");
+            }
+        }
+    }
+
+    public static void adminMenu(Scanner sc){
+        int adminChoice = 0;
+        while(adminChoice != 3){
+            System.out.println("========================");
+            System.out.println("        ADMIN MENU     ");
+            System.out.println("1. View Student");
+            System.out.println("2. Add student");
+            System.out.println("3. Logout");
+            System.out.println("========================");
+            System.out.print("Enter your choice: ");
+
+            adminChoice=sc.nextInt();
+            switch (adminChoice){
+                case 1:
+                    System.out.println("CH001: Swagatika: Btech");
+                    System.out.println("CH002: Ammu: MCA");
+                    System.out.println("CH003: Kookie: BS");
+                    break;
+                case 2:
+                    System.out.println("Enter Student Name");
+                    System.out.println("Enter Student ID");
+                    System.out.println("Enter Department");
+                    break;
+                case 3:
+                    System.out.println("Logging out...");
+                    break;
+                default:
+                    System.out.println("Invalid Admin Menu Choice!");
+            }
+        }
+    }
     public static void main(String[]args){
         Scanner sc = new Scanner(System.in);
 
@@ -20,39 +91,10 @@ public class CampusHub {
 
             switch (choice){
                 case 1:
-                    int studentChoice = 0;
-                    while (studentChoice!=3){
-                        System.out.println("========================");
-                        System.out.println("        STUDENT MENU     ");
-                        System.out.println("1. view Profile");
-                        System.out.println("2. view Courses");
-                        System.out.println("3. Logout");
-                        System.out.println("========================");
-                        System.out.print("Enter your choice: ");
-
-                        studentChoice=sc.nextInt();
-                        switch (studentChoice){
-                            case 1:
-                                System.out.println("Name: Demo Student");
-                                System.out.println("ID: CH001");
-                                System.out.println("Department: CSE");
-                                break;
-                            case 2:
-                                System.out.println("Java");
-                                System.out.println("HTML");
-                                System.out.println("SQL");
-                                System.out.println("CSS");
-                                break;
-                            case 3:
-                                System.out.println("Logging out...");
-                                break;
-                            default:
-                                System.out.println("Invalid Student Menu Choice!");
-                        }
-                    }
+                    studentMenu(sc);
                     break;
                 case 2:
-                    System.out.println("Admin Login Selected");
+                    adminMenu(sc);
                     break;
                 case 3:
                     System.out.println("Thank You for using CampusHub ERP!");
