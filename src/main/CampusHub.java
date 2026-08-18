@@ -5,15 +5,19 @@ import java.util.Scanner;
 public class CampusHub {
     static StudentManager manager = new StudentManager();
     static CourseManager courseManager = new CourseManager();
+    static EnrollmentManager enrollmentManager = new EnrollmentManager();
     public static void studentMenu(Scanner sc){
 
         int studentChoice = 0;
-        while (studentChoice!=3){
+        while (studentChoice!=6){
             System.out.println("========================");
             System.out.println("        STUDENT MENU     ");
             System.out.println("1. View Profile");
             System.out.println("2. View Courses");
-            System.out.println("3. Logout");
+            System.out.println("3. Enroll Course");
+            System.out.println("4. View Enrolled Courses");
+            System.out.println("5. Drop Courses");
+            System.out.println("6. Logout");
             System.out.println("========================");
             System.out.print("Enter your choice: ");
 
@@ -29,6 +33,25 @@ public class CampusHub {
                     courseManager.viewCourses();
                     break;
                 case 3:
+                    System.out.print("Enter Student ID: ");
+                    String studentId = sc.next();
+                    System.out.print("Enter Course ID: ");
+                    String courseId = sc.next();
+                    enrollmentManager.enrollStudent(studentId, courseId);
+                    break;
+                case 4:
+                    System.out.print("Enter Student ID: ");
+                    String enrolledStudentId = sc.next();
+                    enrollmentManager.viewEnrolledCourses(enrolledStudentId);
+                    break;
+                case 5:
+                    System.out.print("Enter Student ID: ");
+                    String dropStudentId = sc.next();
+                    System.out.print("Enter Course ID to drop: ");
+                    String dropCourseId = sc.next();
+                    enrollmentManager.dropCourse(dropStudentId, dropCourseId);
+                    break;
+                case 6:
                     System.out.println("Logging out...");
                     break;
                 default:
@@ -38,7 +61,7 @@ public class CampusHub {
     }
     public static void courseMenu(Scanner sc) {
         int courseChoice = 0;
-        while (courseChoice != 5) {
+        while (courseChoice != 6) {
 
             System.out.println("========================");
             System.out.println("      COURSE MENU");
@@ -46,7 +69,8 @@ public class CampusHub {
             System.out.println("2. Search Course");
             System.out.println("3. Add Course");
             System.out.println("4. Delete Course");
-            System.out.println("5. Back");
+            System.out.println("5. Update Course");
+            System.out.println("6. Back");
             System.out.println("========================");
             System.out.print("Enter your choice: ");
 
@@ -77,6 +101,13 @@ public class CampusHub {
                     courseManager.deleteCourse(deleteId);
                     break;
                 case 5:
+                    System.out.print("Enter Course ID to update: ");
+                    String updateId = sc.next();
+                    System.out.print("Enter New Course Name: ");
+                    String newCourseName = sc.next();
+                    courseManager.updateCourse(updateId, newCourseName);
+                    break;
+                case 6:
                     System.out.println("Returning to Admin Menu...");
                     break;
                 default:
@@ -88,7 +119,7 @@ public class CampusHub {
     public static void adminMenu(Scanner sc){
 
         int adminChoice = 0;
-        while(adminChoice != 7){
+        while(adminChoice != 8){
             System.out.println("========================");
             System.out.println("        ADMIN MENU     ");
             System.out.println("1. View Student");
@@ -97,7 +128,8 @@ public class CampusHub {
             System.out.println("4. Delete Student");
             System.out.println("5. Update Student");
             System.out.println("6. Course Management");
-            System.out.println("7. Logout");
+            System.out.println("7. Enrollment Report");
+            System.out.println("8. Logout");
             System.out.println("========================");
             System.out.print("Enter your choice: ");
             adminChoice=sc.nextInt();
@@ -109,49 +141,39 @@ public class CampusHub {
                 case 2:
                     System.out.print("Enter Student ID: ");
                     String searchId = sc.next();
-
                     manager.searchStudent(searchId);
-
                     break;
-
                 case 3:
                     System.out.println("Enter Student Name");
                     String name = sc.next();
-
                     System.out.println("Enter Student ID");
                     String id = sc.next();
-
                     System.out.println("Enter Department");
                     String department = sc.next();
-
                     manager.addStudent(name, id, department);
-
+                    FileManager.saveStudents(manager);
                     break;
-
                 case 4:
                     System.out.print("Enter Student ID to delete: ");
                     String deleteId = sc.next();
-
                     manager.deleteStudent(deleteId);
-
                     break;
-
                 case 5:
                     System.out.print("Enter Student ID to update: ");
                     String updateId = sc.next();
-
                     System.out.print("Enter New Name: ");
                     String newName = sc.next();
-
                     System.out.print("Enter New Department: ");
                     String newDepartment = sc.next();
-
                     manager.updateStudent(updateId, newName, newDepartment);
                     break;
                 case 6:
                     courseMenu(sc);
                     break;
                 case 7:
+                    enrollmentManager.viewAllEnrollments();
+                    break;
+                case 8:
                     System.out.println("Logging out...");
                     break;
                 default:
@@ -161,7 +183,8 @@ public class CampusHub {
     }
     public static void main(String[]args){
         Scanner sc = new Scanner(System.in);
-
+        FileManager.createDataFolder();
+        FileManager.saveStudents(manager);
         int choice = 0;
         while(choice != 3){
             System.out.println("================================");

@@ -79,4 +79,10 @@ public class StudentManager {
         students[index].setDepartment(newDepartment);
         System.out.println("Student updated successfully!");
     }
+    public Student[] getStudents() {
+        return students;
+    }
+    public int getStudentCount() {
+        return studentCount;
+    }
 }

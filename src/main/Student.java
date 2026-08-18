@@ -10,19 +10,15 @@ public class Student {
         this.id = id;
         this.department = department;
     }
-
     public String getName() {
         return name;
     }
-
     public String getId() {
         return id;
     }
-
     public String getDepartment() {
         return department;
     }
-
     public void setName(String name) {
         this.name = name;
     }

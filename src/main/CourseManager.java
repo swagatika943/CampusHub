@@ -26,6 +26,9 @@ public class CourseManager {
         }
         return -1;
     }
+    public String getCourseDetails(int index) {
+        return courses[index].getCourseId() + ": " + courses[index].getCourseName();
+    }
     public void searchCourse(String courseId) {
         int index = findCourse(courseId);
         if (index == -1) {
