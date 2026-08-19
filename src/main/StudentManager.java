@@ -85,4 +85,10 @@ public class StudentManager {
     public int getStudentCount() {
         return studentCount;
     }
+    public void clearStudents() {
+        for (int i = 0; i < students.length; i++) {
+            students[i] = null;
+        }
+        studentCount = 0;
+    }
 }

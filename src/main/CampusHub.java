@@ -1,7 +1,6 @@
 package main;
 
 import java.util.Scanner;
-
 public class CampusHub {
     static StudentManager manager = new StudentManager();
     static CourseManager courseManager = new CourseManager();
@@ -94,6 +93,7 @@ public class CampusHub {
                     String courseName = sc.next();
 
                     courseManager.addCourse(courseId, courseName);
+                    FileManager.saveCourses(courseManager);
                     break;
                 case 4:
                     System.out.print("Enter Course ID to delete: ");
@@ -106,6 +106,7 @@ public class CampusHub {
                     System.out.print("Enter New Course Name: ");
                     String newCourseName = sc.next();
                     courseManager.updateCourse(updateId, newCourseName);
+                    FileManager.saveCourses(courseManager);
                     break;
                 case 6:
                     System.out.println("Returning to Admin Menu...");
@@ -157,6 +158,7 @@ public class CampusHub {
                     System.out.print("Enter Student ID to delete: ");
                     String deleteId = sc.next();
                     manager.deleteStudent(deleteId);
+                    FileManager.saveStudents(manager);
                     break;
                 case 5:
                     System.out.print("Enter Student ID to update: ");
@@ -166,6 +168,7 @@ public class CampusHub {
                     System.out.print("Enter New Department: ");
                     String newDepartment = sc.next();
                     manager.updateStudent(updateId, newName, newDepartment);
+                    FileManager.saveStudents(manager);
                     break;
                 case 6:
                     courseMenu(sc);
@@ -184,7 +187,9 @@ public class CampusHub {
     public static void main(String[]args){
         Scanner sc = new Scanner(System.in);
         FileManager.createDataFolder();
-        FileManager.saveStudents(manager);
+        FileManager.loadStudents(manager);
+        FileManager.loadCourses(courseManager);
+
         int choice = 0;
         while(choice != 3){
             System.out.println("================================");

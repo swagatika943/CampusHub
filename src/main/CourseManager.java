@@ -73,4 +73,17 @@ public class CourseManager {
         courses[index].setCourseName(newCourseName);
         System.out.println("Course updated successfully!");
     }
+    public Course[] getCourses() {
+        return courses;
+    }
+    public int getCourseCount() {
+        return courseCount;
+    }
+    public void clearCourses() {
+        for (int i = 0; i < courses.length; i++) {
+            courses[i] = null;
+        }
+        courseCount = 0;
+    }
 }
+
