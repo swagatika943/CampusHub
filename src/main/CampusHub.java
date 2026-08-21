@@ -37,6 +37,7 @@ public class CampusHub {
                     System.out.print("Enter Course ID: ");
                     String courseId = sc.next();
                     enrollmentManager.enrollStudent(studentId, courseId);
+                    FileManager.saveEnrollments(enrollmentManager);
                     break;
                 case 4:
                     System.out.print("Enter Student ID: ");
@@ -190,6 +191,7 @@ public class CampusHub {
         FileManager.createDataFolder();
         FileManager.loadStudents(manager);
         FileManager.loadCourses(courseManager);
+        FileManager.loadEnrollments(enrollmentManager);
 
         int choice = 0;
         while(choice != 3){

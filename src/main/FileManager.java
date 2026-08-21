@@ -117,4 +117,23 @@ public class FileManager {
             System.out.println("Error saving enrollments!");
         }
     }
+    public static void loadEnrollments(EnrollmentManager manager) {
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader("data/enrollments.txt"));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                String[] data = line.split(",");
+                String studentId = data[0];
+                String courseId = data[1];
+
+                manager.enrollStudent(studentId, courseId);
+            }
+            reader.close();
+            System.out.println("Enrollments loaded successfully!");
+
+        } catch (IOException e) {
+            System.out.println("Error loading enrollments!");
+        }
+    }
 }
