@@ -86,4 +86,10 @@ public class EnrollmentManager {
             );
         }
     }
+    public Enrollment[] getEnrollments() {
+        return enrollments;
+    }
+    public int getEnrollmentCount() {
+        return enrollmentCount;
+    }
 }

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.FileReader;
 public class FileManager {
+
     public static void createDataFolder() {
         File folder = new File("data");
         if (!folder.exists()) {
@@ -92,6 +93,28 @@ public class FileManager {
             System.out.println("Courses loaded successfully!");
         } catch (IOException e) {
             System.out.println("Error loading courses!");
+        }
+    }
+    public static void saveEnrollments(EnrollmentManager manager) {
+
+        try {
+            FileWriter writer = new FileWriter("data/enrollments.txt");
+            Enrollment[] enrollments = manager.getEnrollments();
+            int enrollmentCount = manager.getEnrollmentCount();
+
+            for (int i = 0; i < enrollmentCount; i++) {
+                writer.write(
+                        enrollments[i].getStudentId() + ","
+                                + enrollments[i].getCourseId()
+                                + "\n"
+                );
+            }
+            writer.close();
+
+            System.out.println("Enrollments saved successfully!");
+
+        } catch (IOException e) {
+            System.out.println("Error saving enrollments!");
         }
     }
 }

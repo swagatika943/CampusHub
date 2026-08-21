@@ -99,6 +99,7 @@ public class CampusHub {
                     System.out.print("Enter Course ID to delete: ");
                     String deleteId = sc.next();
                     courseManager.deleteCourse(deleteId);
+                    FileManager.saveCourses(courseManager);
                     break;
                 case 5:
                     System.out.print("Enter Course ID to update: ");
