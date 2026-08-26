@@ -45,7 +45,7 @@ public class FileManager {
                 String id = data[0];
                 String name = data[1];
                 String department = data[2];
-                manager.addStudent(name, id, department);
+                manager.loadStudent(name, id, department);
             }
             reader.close();
             System.out.println("Students loaded successfully!");
@@ -81,13 +81,10 @@ public class FileManager {
 
             String line;
             while ((line = reader.readLine()) != null) {
-
                 String[] data = line.split(",");
-
                 String id = data[0];
                 String name = data[1];
-
-                manager.addCourse(id, name);
+                manager.loadCourse(id, name);
             }
             reader.close();
             System.out.println("Courses loaded successfully!");
@@ -127,7 +124,7 @@ public class FileManager {
                 String studentId = data[0];
                 String courseId = data[1];
 
-                manager.enrollStudent(studentId, courseId);
+                manager.loadEnrollment(studentId, courseId);
             }
             reader.close();
             System.out.println("Enrollments loaded successfully!");
