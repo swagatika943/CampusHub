@@ -1,5 +1,6 @@
 package main;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 public class CampusHub {
     static StudentManager manager = new StudentManager();
@@ -20,7 +21,13 @@ public class CampusHub {
             System.out.println("========================");
             System.out.print("Enter your choice: ");
 
-            studentChoice=sc.nextInt();
+            try {
+                studentChoice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number!");
+                sc.next();
+                continue;
+            }
 
             switch (studentChoice){
                 case 1:
@@ -135,7 +142,14 @@ public class CampusHub {
             System.out.println("8. Logout");
             System.out.println("========================");
             System.out.print("Enter your choice: ");
-            adminChoice=sc.nextInt();
+
+            try {
+                adminChoice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number!");
+                sc.next();
+                continue;
+            }
 
             switch (adminChoice){
                 case 1:
@@ -153,8 +167,11 @@ public class CampusHub {
                     String id = sc.next();
                     System.out.println("Enter Department");
                     String department = sc.next();
-                    manager.addStudent(name, id, department);
-                    FileManager.saveStudents(manager);
+
+                    boolean added = manager.addStudent(name, id, department);
+                    if (added) {
+                        FileManager.saveStudents(manager);
+                    }
                     break;
                 case 4:
                     System.out.print("Enter Student ID to delete: ");
@@ -203,7 +220,12 @@ public class CampusHub {
             System.out.println("================================");
             System.out.print("Enter your choice: ");
 
-            choice = sc.nextInt();
+            try {
+                choice = sc.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Please enter a valid number!");
+                sc.next();
+            }
 
             switch (choice){
                 case 1:
