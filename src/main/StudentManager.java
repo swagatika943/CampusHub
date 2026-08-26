@@ -39,22 +39,23 @@ public class StudentManager {
             System.out.println("Department: " + students[index].getDepartment());
         }
     }
-    public void addStudent(String name, String id, String department) {
+    public boolean addStudent(String name, String id, String department) {
         if (studentCount >= students.length) {
             System.out.println("Student limit reached!");
-            return;
+            return false;
         }
-        if (!id.startsWith("CH")) {
+        if (!isValidStudentId(id)) {
             System.out.println("Invalid Student ID!");
-            return;
+            return false;
         }
         if (findStudent(id) != -1) {
             System.out.println("Student ID already exists!");
-            return;
+            return false;
         }
         students[studentCount] = new Student(name, id, department);
         studentCount++;
         System.out.println("Student added successfully!");
+        return true;
     }
     public void deleteStudent(String id) {
         int index = findStudent(id);
@@ -90,5 +91,22 @@ public class StudentManager {
             students[i] = null;
         }
         studentCount = 0;
+    }
+    public void loadStudent(String name, String id, String department) {
+        if (studentCount < students.length) {
+            students[studentCount] = new Student(name, id, department);
+            studentCount++;
+        }
+    }
+    public boolean isValidStudentId(String id) {
+        if (id == null || !id.startsWith("CH") || id.length() != 5) {
+            return false;
+        }
+        for (int i = 2; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
