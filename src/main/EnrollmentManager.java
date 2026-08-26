@@ -92,4 +92,14 @@ public class EnrollmentManager {
     public int getEnrollmentCount() {
         return enrollmentCount;
     }
+    public void loadEnrollment(String studentId, String courseId) {
+
+        if (enrollmentCount < enrollments.length) {
+            enrollments[enrollmentCount] =
+                    new Enrollment(studentId, courseId);
+
+            enrollmentCount++;
+        }
+    }
 }
+
