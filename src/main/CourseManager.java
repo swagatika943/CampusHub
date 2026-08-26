@@ -85,5 +85,22 @@ public class CourseManager {
         }
         courseCount = 0;
     }
+    public void loadCourse(String id, String name) {
+        if (courseCount < courses.length) {
+            courses[courseCount] = new Course(id, name);
+            courseCount++;
+        }
+    }
+    public boolean isValidCourseId(String id) {
+        if (id == null || !id.startsWith("C") || id.length() != 4) {
+            return false;
+        }
+        for (int i = 1; i < id.length(); i++) {
+            if (!Character.isDigit(id.charAt(i))) {
+                return false;
+            }
+        }
+        return true;
+    }
 }
 
