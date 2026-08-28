@@ -57,11 +57,11 @@ public class StudentManager {
         System.out.println("Student added successfully!");
         return true;
     }
-    public void deleteStudent(String id) {
+    public boolean deleteStudent(String id) {
         int index = findStudent(id);
         if (index == -1) {
             System.out.println("Student not found!");
-            return;
+            return false;
         }
         for (int i = index; i < studentCount - 1; i++) {
             students[i] = students[i + 1];
@@ -69,16 +69,19 @@ public class StudentManager {
         studentCount--;
         students[studentCount] = null;
         System.out.println("Student deleted successfully!");
+        return true;
     }
-    public void updateStudent(String id, String newName, String newDepartment) {
+    public boolean updateStudent(String id, String newName, String newDepartment) {
         int index = findStudent(id);
         if (index == -1) {
             System.out.println("Student not found!");
-            return;
+            return false;
         }
         students[index].setName(newName);
         students[index].setDepartment(newDepartment);
+
         System.out.println("Student updated successfully!");
+        return true;
     }
     public Student[] getStudents() {
         return students;
