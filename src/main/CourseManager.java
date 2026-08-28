@@ -38,24 +38,30 @@ public class CourseManager {
             System.out.println("Course Name: " + courses[index].getCourseName());
         }
     }
-    public void addCourse(String courseId, String courseName) {
+    public boolean addCourse(String courseId, String courseName) {
         if (courseCount >= courses.length) {
             System.out.println("Course limit reached!");
-            return;
+            return false;
+        }
+        if (!isValidCourseId(courseId)) {
+            System.out.println("Invalid Course ID!");
+            return false;
         }
         if (findCourse(courseId) != -1) {
             System.out.println("Course ID already exists!");
-            return;
+            return false;
         }
         courses[courseCount] = new Course(courseId, courseName);
         courseCount++;
+
         System.out.println("Course added successfully!");
+        return true;
     }
-    public void deleteCourse(String courseId) {
+    public boolean deleteCourse(String courseId) {
         int index = findCourse(courseId);
         if (index == -1) {
             System.out.println("Course not found!");
-            return;
+            return false;
         }
         for (int i = index; i < courseCount - 1; i++) {
             courses[i] = courses[i + 1];
@@ -63,15 +69,17 @@ public class CourseManager {
         courseCount--;
         courses[courseCount] = null;
         System.out.println("Course deleted successfully!");
+        return true;
     }
-    public void updateCourse(String courseId, String newCourseName) {
+    public boolean updateCourse(String courseId, String newCourseName) {
         int index = findCourse(courseId);
         if (index == -1) {
             System.out.println("Course not found!");
-            return;
+            return false;
         }
         courses[index].setCourseName(newCourseName);
         System.out.println("Course updated successfully!");
+        return true;
     }
     public Course[] getCourses() {
         return courses;
