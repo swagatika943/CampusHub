@@ -5,7 +5,7 @@ import java.util.Scanner;
 public class CampusHub {
     static StudentManager manager = new StudentManager();
     static CourseManager courseManager = new CourseManager();
-    static EnrollmentManager enrollmentManager = new EnrollmentManager();
+    static EnrollmentManager enrollmentManager = new EnrollmentManager(manager, courseManager);
     public static void studentMenu(Scanner sc){
 
         int studentChoice = 0;
@@ -43,8 +43,11 @@ public class CampusHub {
                     String studentId = sc.next();
                     System.out.print("Enter Course ID: ");
                     String courseId = sc.next();
-                    enrollmentManager.enrollStudent(studentId, courseId);
-                    FileManager.saveEnrollments(enrollmentManager);
+
+                    boolean enrolled = enrollmentManager.enrollStudent(studentId, courseId);
+                    if (enrolled) {
+                        FileManager.saveEnrollments(enrollmentManager);
+                    }
                     break;
                 case 4:
                     System.out.print("Enter Student ID: ");
@@ -56,7 +59,11 @@ public class CampusHub {
                     String dropStudentId = sc.next();
                     System.out.print("Enter Course ID to drop: ");
                     String dropCourseId = sc.next();
-                    enrollmentManager.dropCourse(dropStudentId, dropCourseId);
+
+                    boolean dropped = enrollmentManager.dropCourse(dropStudentId, dropCourseId);
+                    if (dropped) {
+                        FileManager.saveEnrollments(enrollmentManager);
+                    }
                     break;
                 case 6:
                     System.out.println("Logging out...");
@@ -100,22 +107,30 @@ public class CampusHub {
                     System.out.print("Enter Course Name: ");
                     String courseName = sc.next();
 
-                    courseManager.addCourse(courseId, courseName);
-                    FileManager.saveCourses(courseManager);
+                    boolean addedCourse = courseManager.addCourse(courseId, courseName);
+                    if (addedCourse) {
+                        FileManager.saveCourses(courseManager);
+                    }
                     break;
                 case 4:
                     System.out.print("Enter Course ID to delete: ");
                     String deleteId = sc.next();
-                    courseManager.deleteCourse(deleteId);
-                    FileManager.saveCourses(courseManager);
+
+                    boolean deletedCourse = courseManager.deleteCourse(deleteId);
+                    if (deletedCourse) {
+                        FileManager.saveCourses(courseManager);
+                    }
                     break;
                 case 5:
                     System.out.print("Enter Course ID to update: ");
                     String updateId = sc.next();
                     System.out.print("Enter New Course Name: ");
                     String newCourseName = sc.next();
-                    courseManager.updateCourse(updateId, newCourseName);
-                    FileManager.saveCourses(courseManager);
+
+                    boolean updatedCourse = courseManager.updateCourse(updateId, newCourseName);
+                    if (updatedCourse) {
+                        FileManager.saveCourses(courseManager);
+                    }
                     break;
                 case 6:
                     System.out.println("Returning to Admin Menu...");
@@ -176,8 +191,11 @@ public class CampusHub {
                 case 4:
                     System.out.print("Enter Student ID to delete: ");
                     String deleteId = sc.next();
-                    manager.deleteStudent(deleteId);
-                    FileManager.saveStudents(manager);
+
+                    boolean deleted = manager.deleteStudent(deleteId);
+                    if (deleted) {
+                        FileManager.saveStudents(manager);
+                    }
                     break;
                 case 5:
                     System.out.print("Enter Student ID to update: ");
@@ -186,8 +204,11 @@ public class CampusHub {
                     String newName = sc.next();
                     System.out.print("Enter New Department: ");
                     String newDepartment = sc.next();
-                    manager.updateStudent(updateId, newName, newDepartment);
-                    FileManager.saveStudents(manager);
+
+                    boolean updated = manager.updateStudent(updateId, newName, newDepartment);
+                    if (updated) {
+                        FileManager.saveStudents(manager);
+                    }
                     break;
                 case 6:
                     courseMenu(sc);
